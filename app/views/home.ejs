@@ -41,10 +41,18 @@
 
             };
 
+            console.log(dados);
+
+            var tabela = '<table class="table col-md-5">';
+
             for(chave in dados){                
-                
-                console.log(chave + ' ' + dados[chave]);                
+                tabela += '<tr>';
+                tabela += '<td>' + chave + '</td>';
+                tabela += '<td>' + dados[chave] + '</td>'; 
+                tabela += '</tr>';
             };
+
+            document.getElementById('tabela').innerHTML = tabela;
             
         };
 
@@ -54,5 +62,7 @@
 
     <input type="file" onchange="pegarArquivo(this)">
     
+    <div id="tabela"></div>
+
 </body>
 </html>
