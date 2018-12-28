@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home </title>
+
+    <link rel="stylesheet" href="http://localhost:8000/css/bootstrap.min.css">
+
+    <script>
+        var leitor = new FileReader();
+        window.onload = function init() {
+            leitor.onload = lerArquivo;
+        };
+
+        function pegarArquivo(inputFile) {
+            var file = inputFile.files[0];
+            leitor.readAsText(file);
+        };
+
+        function lerArquivo(evt) {
+
+            //cria um array, onde uma linha do arquivo é uma posicao no array
+            var fileArr = evt.target.result.split('\n');
+            
+            //console.log(fileArr[1]);
+
+            var dados = {};
+
+            for (var i = 0; i < fileArr.length; i++){
+                //console.log(fileArr[i]);
+                var linha = fileArr[i].split(',');   
+                //console.log(linha[0] + ' ' + linha[1]);                
+                if(dados[linha[0]]){
+                    //console.log('ja existe, entao agrupa');
+                    dados[linha[0]] += parseInt(linha[1]);
+                } else {
+                    //console.log('nao existe, adiciona novo item');
+                    dados[linha[0]] = parseInt(linha[1]);
+                };
+
+            };
+
+            for(chave in dados){                
+                
+                console.log(chave + ' ' + dados[chave]);                
+            };
+            
+        };
+
+    </script>
+</head>
+<body>
+
+    <input type="file" onchange="pegarArquivo(this)">
+    
+</body>
+</html>
